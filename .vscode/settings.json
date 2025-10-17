@@ -1,0 +1,5 @@
+{
+    "python.defaultInterpreterPath": ".venv/bin/python",
+    "dbt.dbtPath": ".venv/bin/dbt",
+    "dbt.lspPath": "/home/cristian/.config/Code/User/globalStorage/dbtlabsinc.dbt/bin/dbt-lsp "
+}
