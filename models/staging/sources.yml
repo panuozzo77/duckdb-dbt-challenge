@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: staging
+    tables:
+      - name: yellow_tripdata
+        description: "Raw yellow taxi trip data"
+        external:
+          location: "data/raw/yellow_tripdata_2025-08.parquet"
