@@ -1,7 +1,7 @@
 -- pulizia dei dati
 WITH source AS (
     SELECT *
-    FROM {{ ref('stg_trip__normalized') }}
+    FROM {{ ref('stg_1_trip__normalized') }}
 )
 SELECT *
 FROM source

@@ -6,7 +6,7 @@ WITH normalized AS (
         rate_code_id,
         store_and_fwd_flag,
         payment_type
-    FROM {{ ref('stg_yellow_tripdata__cleaned') }}
+    FROM {{ ref('stg_2_trip__cleaned') }}
 )
 
 SELECT *
