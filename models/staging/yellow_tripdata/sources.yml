@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: stg_yellow_tripdata__cleaned
+    columns:
+      - name: vendor_id
+        tests:
+          - accepted_values:
+              values: [1, 2, 6, 7]
+      - name: rate_code_id
+        tests:
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 99]
+      - name: store_and_fwd_flag
+        tests:
+          - accepted_values:
+              values: ['Y', 'N']
+      - name: payment_type
+        tests:
+          - accepted_values:
+              values: [0, 1, 2, 3, 4, 5, 6]
+      - name: passenger_count
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 0"
+      - name: trip_distance
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: total_amount
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "> 0"

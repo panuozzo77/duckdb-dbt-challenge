@@ -6,7 +6,7 @@ WITH normalized AS (
         passenger_count,
         trip_distance,
         DATEDIFF('minute', pickup, dropoff) AS trip_minutes
-    FROM {{ ref('stg_yellow_tripdata__normalized') }}
+    FROM {{ ref('stg_yellow_tripdata__cleaned') }}
 )
 
 SELECT *
