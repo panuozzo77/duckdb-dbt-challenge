@@ -1,7 +1,10 @@
 version: 2
 
 models:
-  - name: stg_yellow_tripdata__cleaned
+  - name: stg_2_trip__cleaned
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "DATEDIFF('minute', pickup, dropoff) BETWEEN 1 AND (24*60)"
     columns:
       - name: vendor_id
         tests:
