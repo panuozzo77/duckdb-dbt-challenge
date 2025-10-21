@@ -2,6 +2,7 @@
 
 WITH normalized AS (
     SELECT
+        trip_id,
         vendor_id,
         fare_amount,
         extra,

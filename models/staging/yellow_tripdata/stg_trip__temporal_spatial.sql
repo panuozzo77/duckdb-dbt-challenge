@@ -1,5 +1,6 @@
 WITH normalized AS (
     SELECT
+        trip_id,
         vendor_id,
         pickup,
         dropoff,

@@ -2,6 +2,7 @@
 
 WITH normalized AS (
     SELECT
+        trip_id,
         vendor_id,
         rate_code_id,
         store_and_fwd_flag,
