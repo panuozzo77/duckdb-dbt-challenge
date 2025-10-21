@@ -54,3 +54,6 @@ WHERE
     -- Regola 6: Coerenza logica tra l'importo totale e la tariffa base.
     -- Il totale deve essere almeno pari alla tariffa base.
     AND total_amount >= fare_amount
+
+    -- Regola 7: Distanze umanamente fattibili
+    AND trip_distance <= 350
