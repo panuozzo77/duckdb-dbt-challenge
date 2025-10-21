@@ -9,28 +9,28 @@ models:
       - name: vendor_id
         tests:
           - accepted_values:
-              values: [1, 2, 6, 7]
+              values: [1, 2, 6, 7] # passa
       - name: rate_code_id
         tests:
           - accepted_values:
-              values: [1, 2, 3, 4, 5, 6, 99]
+              values: [1, 2, 3, 4, 5, 6, 99] # passa
       - name: store_and_fwd_flag
         tests:
           - accepted_values:
-              values: ['Y', 'N']
+              values: ['Y', 'N'] # passa
       - name: payment_type
         tests:
           - accepted_values:
-              values: [0, 1, 2, 3, 4, 5, 6]
+              values: [0, 1, 2, 3, 4, 5, 6] #passa
       - name: passenger_count
         tests:
-          - dbt_utils.expression_is_true:
-              expression: "> 0"
+          - dbt_utils.expression_is_true: 
+              expression: "> 0" # non passa
       - name: trip_distance
         tests:
           - dbt_utils.expression_is_true:
-              expression: ">= 0"
+              expression: ">= 0" # non passa
       - name: total_amount
         tests:
           - dbt_utils.expression_is_true:
-              expression: "> 0"
+              expression: "> 0" # non passa
