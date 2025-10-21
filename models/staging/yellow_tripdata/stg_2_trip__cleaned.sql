@@ -45,7 +45,7 @@ WHERE
 
     -- Regola 4: La durata del viaggio deve essere plausibile (tra 1 minuto e 24 ore).
     -- Questo esclude anche i casi in cui dropoff <= pickup.
-    AND DATEDIFF('minute', pickup, dropoff) BETWEEN 1 AND (24 * 60)
+    --AND DATEDIFF('minute', pickup, dropoff) BETWEEN 1 AND (24 * 60)
 
     -- Regola 5: Un viaggio deve avere una distanza percorsa > 0 per essere significativo.
     -- Questo elimina i "non-viaggi" e gli errori di dati con distanza zero.

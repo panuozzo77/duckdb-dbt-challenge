@@ -13,7 +13,6 @@ WITH cleaned_trips AS (
         trip_distance,
         trip_minutes,
     FROM {{ ref('stg_trip__metrics') }}
-    --WHERE trip_distance > 0
 ),
 
 distance_segmentation AS (
@@ -36,15 +35,24 @@ SELECT
     END AS distance_category
 FROM distance_segmentation
 
-ORDER BY trip_distance DESC
+ORDER BY trip_minutes DESC
 
 /*
 Previewing node 'fct_trip__distance_classifier':
 | trip_id              | vendor_id | passenger_count | trip_distance | trip_minutes | distance_category |
 | -------------------- | --------- | --------------- | ------------- | ------------ | ----------------- |
-| b36b85e4454e76306... |         2 |               1 |      3.900,78 |           12 | long              |
+| b36b85e4454e76306... |         2 |               1 | !!!  3.900,78 |    ! ! !  12 | long              |
 | 02ccda5ccb41407ae... |         2 |               3 |        338,25 |          339 | long              |
 | 8598649c589182723... |         2 |               1 |        310,43 |           12 | long              |
 | 7bc65659c116f5383... |         1 |               1 |        302,40 |           29 | long              |
 | 233a6d04fa04f866f... |         2 |               1 |        302,16 |          292 | long              |
+
+Previewing node 'fct_trip__distance_classifier':
+| trip_id              | vendor_id | passenger_count | trip_distance | trip_minutes | distance_category |
+| -------------------- | --------- | --------------- | ------------- | ------------ | ----------------- |
+| 267034eb2082e845e... |         2 |               1 |          0,16 |   ! ! ! 6988 | short             |
+| f0d36899d7f8e5f3f... |         2 |               1 |          7,39 |         4359 | long              |
+| 483ed561b171d4275... |         2 |               1 |          0,97 |         4280 | short             |
+| 460de06673315d0d5... |         2 |               1 |         11,61 |         4190 | long              |
+| cbbcb211ceed487aa... |         1 |               1 |         12,10 |         4188 | long              |
 */
