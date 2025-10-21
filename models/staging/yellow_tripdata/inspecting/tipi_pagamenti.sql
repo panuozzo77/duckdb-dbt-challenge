@@ -1,12 +1,12 @@
 -- payment_type IN (0, 1, 2, 3, 4, 5, 6)
 SELECT
-    COUNT_IF(total_amount <= 0 AND payment_type = 0) AS flessibile,
-    COUNT_IF(total_amount <= 0 AND payment_type = 1) AS carta,
-    COUNT_IF(total_amount <= 0 AND payment_type = 2) AS cash, -- per il readme è PREPAID
-    COUNT_IF(total_amount <= 0 AND payment_type = 3) AS ggratis,
-    COUNT_IF(total_amount <= 0 AND payment_type = 4) AS problema,
-    COUNT_IF(total_amount <= 0 AND payment_type = 5) AS sconosciuto,
-    COUNT_IF(total_amount <= 0 AND payment_type = 6) AS cancellato,
+    COUNT_IF(total_amount > 0 AND payment_type = 0) AS flessibile,
+    COUNT_IF(total_amount > 0 AND payment_type = 1) AS carta,
+    COUNT_IF(total_amount > 0 AND payment_type = 2) AS cash, -- per il readme è PREPAID
+    COUNT_IF(total_amount > 0 AND payment_type = 3) AS ggratis,
+    COUNT_IF(total_amount > 0 AND payment_type = 4) AS problema,
+    COUNT_IF(total_amount > 0 AND payment_type = 5) AS sconosciuto,
+    COUNT_IF(total_amount > 0 AND payment_type = 6) AS cancellato,
 
 FROM {{ ref('stg_2_trip__cleaned') }}
 /*
