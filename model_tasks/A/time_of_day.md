@@ -27,3 +27,6 @@ Non conoscendo lo scopo finale dell'analisi ma:
 
 --> la media start/finish dovrebbe essere sufficiente per comprendere dove si concentrino maggiormente i flussi.
 
+---
+
+UPDATE: sapendo che le corse 'pulite' durano in media sotto le 3.5h, calcolando l'orario centrale tra l'inizio e la fine della corsa abbiamo una miglior identificazione di quando sono avvenute le tratte, specie per le tratte che durano molto poco ma che sono al limite tra 2 slot temporali.
