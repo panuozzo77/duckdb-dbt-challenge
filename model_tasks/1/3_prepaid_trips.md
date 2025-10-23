@@ -1,0 +1,1 @@
+Per il momento non mi è chiaro a cosa serve conoscere/visualizzare queste corse
