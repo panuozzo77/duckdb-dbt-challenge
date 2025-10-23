@@ -29,13 +29,13 @@ SELECT
     trip_distance,
     trip_minutes,
     CASE
-        WHEN distance_fract = 1 THEN 'short'
-        WHEN distance_fract = 2 THEN 'medium'
-        WHEN distance_fract = 3 THEN 'long'
+        WHEN trip_distance <= 3 THEN 'short'
+        WHEN trip_distance > 3 AND trip_distance <= 12  THEN 'medium'
+        WHEN trip_distance > 12 THEN 'long'
     END AS distance_category
 FROM distance_segmentation
 
-ORDER BY trip_minutes DESC
+ORDER BY trip_distance DESC
 
 /*
 Previewing node 'fct_trip__distance_classifier':
@@ -55,4 +55,12 @@ Previewing node 'fct_trip__distance_classifier':
 | 483ed561b171d4275... |         2 |               1 |          0,97 |         4280 | short             |
 | 460de06673315d0d5... |         2 |               1 |         11,61 |         4190 | long              |
 | cbbcb211ceed487aa... |         1 |               1 |         12,10 |         4188 | long              |
+
+la mia idea è di creare degli scaglioni di 3-5km (esagerando, con orari e posizioni di partenza e arrivo similari), inserire i valori di distanza e minutaggio dentro una curva di distribuzione 
+ed i valori che si discostano troppo vengono scartati in quanto non sono plausibili.
+
+Non ho idea di come si faccia in SQL ^
+
+alternativamente, si calcola la velocità media e se questa supera una certa velocità, è da scartare. Se invece è una velocità troppo bassa... quanto bassa?
+
 */
