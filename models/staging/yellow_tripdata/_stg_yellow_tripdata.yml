@@ -5,6 +5,17 @@ models:
     tests:
       - dbt_utils.expression_is_true:
           expression: "DATEDIFF('minute', pickup, dropoff) BETWEEN 1 AND (24*60)"
+      - dbt_utils.expression_is_true:
+          expression: "start_location_id BETWEEN 1 AND 265" # passa di base
+      - dbt_utils.expression_is_true:
+          expression: "end_location_id BETWEEN 1 AND 265" # passa di base
+      - dbt_utils.expression_is_true: 
+          expression: "passenger_count > 0" # passa con pulizia
+      - dbt_utils.expression_is_true:
+          expression: "trip_distance >= 0" # passa con pulizia
+      - dbt_utils.expression_is_true:
+          expression: "total_amount >= 0" # passa con pulizia
+    
     columns:
       - name: vendor_id
         tests:
@@ -22,15 +33,3 @@ models:
         tests:
           - accepted_values:
               values: [0, 1, 2, 3, 4, 5, 6] #passa di base
-      - name: passenger_count
-        tests:
-          - dbt_utils.expression_is_true: 
-              expression: "> 0" # passa con pulizia
-      - name: trip_distance
-        tests:
-          - dbt_utils.expression_is_true:
-              expression: ">= 0" # passa con pulizia
-      - name: total_amount
-        tests:
-          - dbt_utils.expression_is_true:
-              expression: ">= 0" # passa con pulizia

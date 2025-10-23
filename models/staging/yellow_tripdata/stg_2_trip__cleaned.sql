@@ -31,21 +31,21 @@ SELECT *
 FROM source
 WHERE
     -- Regola 1: Filtra i tipi di pagamento che non rappresentano una transazione valida
-    payment_type NOT IN (5, 6)
+    payment_type NOT IN (4, 5, 6)
 
     -- Regola 2: L'importo totale deve essere coerente con il tipo di pagamento.
     -- Deve essere > 0 per pagamenti reali (Carta, Contanti) o può essere 0 per 'No Charge' e 'Dispute'.
     AND (
         total_amount > 0 OR
-        (total_amount = 0 AND payment_type IN (3, 4))
+        (total_amount = 0 AND payment_type IN (2, 3))
     )
 
     -- Regola 3: Un viaggio deve avere almeno un passeggero.
     AND passenger_count > 0
 
-    -- Regola 4: La durata del viaggio deve essere plausibile (tra 1 minuto e 24 ore).
+    -- Regola 4: La durata del viaggio deve essere plausibile (tra 1 minuto e 3.5 ore).
     -- Questo esclude anche i casi in cui dropoff <= pickup.
-    --AND DATEDIFF('minute', pickup, dropoff) BETWEEN 1 AND (24 * 60)
+    AND DATEDIFF('minute', pickup, dropoff) BETWEEN 1 AND (3.5 * 60)
 
     -- Regola 5: Un viaggio deve avere una distanza percorsa > 0 per essere significativo.
     -- Questo elimina i "non-viaggi" e gli errori di dati con distanza zero.
@@ -55,5 +55,5 @@ WHERE
     -- Il totale deve essere almeno pari alla tariffa base.
     AND total_amount >= fare_amount
 
-    -- Regola 7: Distanze umanamente fattibili
-    AND trip_distance <= 350
+    -- Regola 7: Distanze umanamente fattibili a 120km/h in 3.5h
+    AND trip_distance <= 420
