@@ -13,14 +13,16 @@ WITH cleaned_trips AS (
         trip_distance,
         trip_minutes,
     FROM {{ ref('stg_trip__metrics') }}
-),
+)
 
+/*
 distance_segmentation AS (
     SELECT
         *,
         NTILE(3) OVER (ORDER BY trip_distance) AS distance_fract
     FROM cleaned_trips
 )
+*/
 
 SELECT
     trip_id,
@@ -33,9 +35,9 @@ SELECT
         WHEN trip_distance > 3 AND trip_distance <= 12  THEN 'medium'
         WHEN trip_distance > 12 THEN 'long'
     END AS distance_category
-FROM distance_segmentation
+FROM cleaned_trips
 
-ORDER BY trip_distance DESC
+ORDER BY trip_minutes DESC
 
 /*
 Previewing node 'fct_trip__distance_classifier':
