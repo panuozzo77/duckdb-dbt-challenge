@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_2_trip__cleaned
+  - name: stg_trip__cleaned
     tests:
       - dbt_utils.expression_is_true:
           expression: "DATEDIFF('minute', pickup, dropoff) BETWEEN 1 AND (24*60)"

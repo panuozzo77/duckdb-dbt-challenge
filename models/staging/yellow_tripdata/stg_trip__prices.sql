@@ -13,7 +13,7 @@ WITH normalized AS (
         congestion_surcharge,
         airport_fee,
         total_amount
-    FROM {{ ref('stg_3_trip__speed_cleaned') }}
+    FROM {{ ref('stg_trip__speed_filtered') }}
 )
 
 SELECT *

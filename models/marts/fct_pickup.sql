@@ -10,7 +10,7 @@ revenues AS (
     SELECT
         trip_id,
         total_amount
-    FROM {{ ref('stg_trip__prices_details') }}
+    FROM {{ ref('stg_trip__prices') }}
 ),
 
 joined AS (

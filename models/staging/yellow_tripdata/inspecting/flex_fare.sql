@@ -2,7 +2,7 @@ WITH source_data AS (
     SELECT
         payment_type,
         trip_distance
-    FROM {{ ref('stg_2_trip__cleaned') }}
+    FROM {{ ref('stg_trip__cleaned') }}
 )
 
 SELECT

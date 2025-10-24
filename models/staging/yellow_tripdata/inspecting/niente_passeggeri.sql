@@ -6,7 +6,7 @@ select
     end_location_id,
     total_amount,
     trip_distance
-from "yellow_tripdata"."main"."stg_3_trip__speed_cleaned"
+from "yellow_tripdata"."main"."stg_trip__speed_filtered"
 
 where not(passenger_count > 0)
 

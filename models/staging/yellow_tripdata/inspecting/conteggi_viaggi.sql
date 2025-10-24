@@ -6,7 +6,7 @@ SELECT
     COUNT_IF(start_location_id != end_location_id AND trip_distance = 0) AS err_dist,
     COUNT_IF(start_location_id != end_location_id AND trip_distance < 0) AS neg_dist,
     --COUNT_IF(total_amount = 0 AND passenger_count = 0) AS corse_nulle
-FROM {{ ref('stg_3_trip__speed_cleaned') }}
+FROM {{ ref('stg_trip__speed_filtered') }}
 
 /*
 Previewing node 'conteggi_viaggi':

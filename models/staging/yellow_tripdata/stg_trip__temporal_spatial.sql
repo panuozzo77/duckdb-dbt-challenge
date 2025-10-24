@@ -6,7 +6,7 @@ WITH normalized AS (
         dropoff,
         start_location_id,
         end_location_id
-    FROM {{ ref('stg_3_trip__speed_cleaned') }}
+    FROM {{ ref('stg_trip__speed_filtered') }}
 )
 
 SELECT *

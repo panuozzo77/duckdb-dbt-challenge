@@ -8,7 +8,8 @@ SELECT
     COUNT_IF(total_amount > 0 AND payment_type = 5) AS sconosciuto,
     COUNT_IF(total_amount > 0 AND payment_type = 6) AS cancellato,
 
-FROM {{ ref('stg_2_trip__cleaned') }}
+--stg_trip__speed_filtered
+FROM {{ ref('stg_trip__cleaned') }}
 /*
 Pagamenti > 0
 

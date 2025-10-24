@@ -7,7 +7,7 @@ select
     total_amount,
 --    trip_distance,
     passenger_count,
-from "yellow_tripdata"."main"."stg_3_trip__speed_cleaned"
+from "yellow_tripdata"."main"."stg_trip__speed_filtered"
 
 where total_amount < 0
 

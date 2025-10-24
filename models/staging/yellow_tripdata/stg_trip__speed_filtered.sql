@@ -1,6 +1,6 @@
 WITH cleaned_trips AS (
     SELECT *
-    FROM {{ ref('stg_2_trip__cleaned') }}
+    FROM {{ ref('stg_trip__cleaned') }}
 ),
 
 trips_with_duration_and_speed AS (

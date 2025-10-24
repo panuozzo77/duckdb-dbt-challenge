@@ -2,7 +2,7 @@ WITH flex_fare_trips AS (
     SELECT
         *,
         DATEDIFF('minute', pickup, dropoff) AS trip_duration_minutes
-    FROM {{ ref('stg_1_trip__normalized') }}
+    FROM {{ ref('stg_trip__base') }}
     WHERE
         payment_type = 0
 )

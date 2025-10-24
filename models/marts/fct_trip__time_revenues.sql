@@ -9,7 +9,7 @@ WITH normalized AS (
         dropoff,
         start_location_id,
         end_location_id
-    FROM {{ ref('stg_2_trip__cleaned') }}
+    FROM {{ ref('stg_trip__cleaned') }}
 )
 
 SELECT *
@@ -30,7 +30,7 @@ WITH normalized AS (
         congestion_surcharge,
         airport_fee,
         total_amount
-    FROM {{ ref('stg_2_trip__cleaned') }}
+    FROM {{ ref('stg_trip__cleaned') }}
 )
 
 SELECT *
@@ -57,7 +57,7 @@ revenues AS (
     SELECT
         trip_id,
         total_amount
-    FROM {{ ref('stg_trip__prices_details') }}
+    FROM {{ ref('stg_trip__prices') }}
 ),
 
 joined AS (

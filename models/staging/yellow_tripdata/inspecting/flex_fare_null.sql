@@ -1,6 +1,6 @@
 WITH flex_fare_trips AS (
     SELECT *
-    FROM {{ ref('stg_1_trip__normalized') }}
+    FROM {{ ref('stg_trip__base') }}
     WHERE payment_type = 0
 )
 

@@ -2,7 +2,7 @@ SELECT
     SUM(CASE WHEN NOT(DATEDIFF('minute', pickup, dropoff) BETWEEN 1 AND (24*60)) AND total_amount = 0 THEN 1 ELSE 0 END) as istantanei_e_gratis,
     SUM(CASE WHEN NOT(DATEDIFF('minute', pickup, dropoff) BETWEEN 1 AND (24*60)) AND total_amount != 0 THEN 1 ELSE 0 END) as istantanei_e_non_gratis,
     SUM(CASE WHEN NOT(DATEDIFF('minute', pickup, dropoff) BETWEEN 1 AND (24*60)) AND total_amount < 0 THEN 1 ELSE 0 END) as istantanei_e_negativi
-FROM {{ ref('stg_3_trip__speed_cleaned') }}
+FROM {{ ref('stg_trip__speed_filtered') }}
 
 /*
 Previewing node 'corsa_istantanea':
