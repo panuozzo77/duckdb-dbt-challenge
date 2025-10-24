@@ -2,7 +2,7 @@ WITH source_classifier AS (
     SELECT
         distance_category,
         trip_distance
-    FROM {{ ref('fct_trip__distance_classifier') }}
+    FROM {{ ref('dim_trip__distance_classifier') }}
 )
 
 SELECT
