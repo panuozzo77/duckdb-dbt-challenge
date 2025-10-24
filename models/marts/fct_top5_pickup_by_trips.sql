@@ -28,7 +28,6 @@ SELECT
 FROM joined
 GROUP BY pickup_zone
 ORDER BY num_trips DESC
---         num_trips DESC
 
 /*
 Per ricavi:
