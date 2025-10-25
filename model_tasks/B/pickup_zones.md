@@ -7,3 +7,5 @@
 Molto semplice, simile al punto A
 
 Problema: riutilizzare il codice visto che le prime 20 righe sono uguali per i 2 tipi di query. 
+
+TODO: Unificare la visualizzazione delle 2 query
