@@ -31,13 +31,13 @@ SELECT
     trip_distance,
     trip_minutes,
     CASE
-        WHEN trip_distance <= 3 THEN 'short'
-        WHEN trip_distance > 3 AND trip_distance <= 12  THEN 'medium'
-        WHEN trip_distance > 12 THEN 'long'
+        WHEN trip_distance <= 2 THEN 'short'
+        WHEN trip_distance > 2 AND trip_distance <= 5  THEN 'medium'
+        WHEN trip_distance > 5 THEN 'long'
     END AS distance_category
 FROM cleaned_trips
 
-ORDER BY trip_minutes DESC
+ORDER BY trip_minutes ASC , trip_distance DESC
 
 /*
 Previewing node 'fct_trip__distance_classifier':
