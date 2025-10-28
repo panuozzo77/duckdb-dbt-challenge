@@ -27,4 +27,3 @@ SELECT
     SUM(total_amount) AS total_revenue
 FROM joined
 GROUP BY pickup_zone
-ORDER BY total_revenue DESC
