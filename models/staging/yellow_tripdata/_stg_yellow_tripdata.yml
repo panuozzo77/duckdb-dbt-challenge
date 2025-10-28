@@ -1,7 +1,54 @@
 version: 2
 
 models:
+  - name: stg_trip__base
+    description: "Rinomina e standardizza le colonne dalla fonte dati grezza. Genera anche una PK `trip_id` per ogni corsa."
+    columns:
+      - name: trip_id
+        description: "{{ doc('trip_id') }}"
+        tests:
+          - unique
+      - name: vendor_id
+        description: "{{ doc('vendor_id') }}"
+      - name: pickup
+        description: "Timestamp per inizio della corsa."
+      - name: dropoff
+        description: "Timestamp per la fine della corsa."
+      - name: rate_code_id
+        description: "{{ doc('rate_code_id') }}"
+      - name: store_and_fwd_flag
+        description: "{{ doc('store_and_fwd_flag') }}"
+      - name: start_location_id
+        description: "ID della zona di partenza. {{ doc('location_id') }}"
+      - name: end_location_id
+        description: "ID della zona di arrivo. {{ doc('location_id') }}"
+      - name: passenger_count
+        description: "Numero di passeggeri."
+      - name: trip_distance
+        description: "Distanza in miglia."
+      - name: fare_amount
+        description: "Tariffa base della corsa, calcolata in base a tempo e distanza."
+      - name: extra
+        description: "Supplementi vari."
+      - name: mta_tax
+        description: "Tassa obbligatoria."
+      - name: tip_amount
+        description: "Eventuale mancia."
+      - name: tolls_amount
+        description: "Importo dei pedaggi autostradali."
+      - name: improvement_surcharge
+        description: "Supplemento per il miglioramento del servizio."
+      - name: congestion_surcharge
+        description: "Supplemento per traffico."
+      - name: airport_fee
+        description: "Tassa aeroportuale."
+      - name: payment_type
+        description: "{{ doc('payment_type') }}"
+      - name: total_amount
+        description: "{{ doc('total_amount') }}"
+
   - name: stg_trip__cleaned
+    description: "Applica filtri e regole di pulizia al modello di base per rimuovere dati anomali o inconsistenti, come corse con durata non plausibile, distanza zero o importi negativi."
     tests:
       - dbt_utils.expression_is_true:
           expression: "DATEDIFF('minute', pickup, dropoff) BETWEEN 1 AND (24*60)"
@@ -33,3 +80,21 @@ models:
         tests:
           - accepted_values:
               values: [0, 1, 2, 3, 4, 5, 6] #passa di base
+
+  - name: stg_trip__speed_filtered
+    description: "Calcola la velocità media per ogni corsa e filtra quelle con velocità non realistiche (es. troppo lente o troppo veloci), eliminando potenziali errori di tracciamento."
+
+  - name: stg_trip__identifiers
+    description: "Modello specializzato che espone solo gli identificatori principali della corsa (ID, codici, flag)."
+
+  - name: stg_trip__metrics
+    description: "Modello specializzato che espone le metriche quantitative della corsa, come numero di passeggeri, distanza e durata in minuti."
+    columns:
+      - name: trip_minutes
+        description: "Durata totale della corsa calcolata in minuti."
+
+  - name: stg_trip__prices
+    description: "Modello specializzato che espone tutti i campi relativi alla composizione del prezzo finale della corsa (tariffe, tasse, mance, etc.)."
+
+  - name: stg_trip__temporal_spatial
+    description: "Modello specializzato che espone i dati temporali (pickup, dropoff) e spaziali (zone di partenza e arrivo) della corsa."
