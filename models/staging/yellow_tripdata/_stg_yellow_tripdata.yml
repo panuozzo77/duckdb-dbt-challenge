@@ -62,6 +62,8 @@ models:
           expression: "trip_distance >= 0" # passa con pulizia
       - dbt_utils.expression_is_true:
           expression: "total_amount >= 0" # passa con pulizia
+      - dbt_utils.expression_is_true:
+              expression: "total_amount >= fare_amount + extra + mta_tax + tip_amount + tolls_amount + improvement_surcharge + congestion_surcharge + airport_fee" # Got 477059 results (risolto con pulizia)
     
     columns:
       - name: vendor_id
