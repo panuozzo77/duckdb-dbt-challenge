@@ -50,14 +50,14 @@ time_zones AS (
             WHEN EXTRACT(HOUR FROM (pickup + (dropoff - pickup)/2)) >= 22 AND EXTRACT(HOUR FROM (pickup + (dropoff - pickup)/2)) < 5 THEN 'Night'
             --ELSE 'Night'
         END AS time_of_day
-    FROM {{ ref('stg_trip__temporal_spatial') }}
+    FROM {{ ref('int_trip__temporal_spatial') }}
 ),
 
 revenues AS (
     SELECT
         trip_id,
         total_amount
-    FROM {{ ref('stg_trip__prices') }}
+    FROM {{ ref('int_trip__prices') }}
 ),
 
 joined AS (

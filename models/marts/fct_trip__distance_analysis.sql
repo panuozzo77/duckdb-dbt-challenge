@@ -1,6 +1,6 @@
 WITH revenues AS(
     SELECT * 
-    FROM {{ref('stg_trip__prices')}}
+    FROM {{ref('int_trip__prices')}}
 ),
 
 distances AS(

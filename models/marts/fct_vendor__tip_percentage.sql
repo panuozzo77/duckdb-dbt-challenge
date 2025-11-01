@@ -3,7 +3,7 @@ WITH prices AS (
         vendor_id,
         tip_amount,
         total_amount
-        FROM {{ ref('stg_trip__prices')}}
+        FROM {{ ref('int_trip__prices')}}
 )
 
 SELECT 

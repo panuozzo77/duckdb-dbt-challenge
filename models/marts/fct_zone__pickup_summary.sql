@@ -3,14 +3,14 @@ pickup_zones AS (
     SELECT
         trip_id,
         start_location_id,
-    FROM {{ ref('stg_trip__temporal_spatial') }}
+    FROM {{ ref('int_trip__temporal_spatial') }}
 ),
 
 revenues AS (
     SELECT
         trip_id,
         total_amount
-    FROM {{ ref('stg_trip__prices') }}
+    FROM {{ ref('int_trip__prices') }}
 ),
 
 joined AS (

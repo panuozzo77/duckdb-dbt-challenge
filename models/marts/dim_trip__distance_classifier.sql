@@ -12,7 +12,7 @@ WITH cleaned_trips AS (
         passenger_count,
         trip_distance,
         trip_minutes,
-    FROM {{ ref('stg_trip__metrics') }}
+    FROM {{ ref('int_trip__metrics') }}
 )
 
 /*
