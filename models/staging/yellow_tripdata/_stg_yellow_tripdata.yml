@@ -51,7 +51,7 @@ models:
     description: "Applica filtri e regole di pulizia al modello di base per rimuovere dati anomali o inconsistenti, come corse con durata non plausibile, distanza zero o importi negativi."
     tests:
       - dbt_utils.expression_is_true:
-          expression: "DATEDIFF('minute', pickup, dropoff) BETWEEN 1 AND (24*60)"
+          expression: "DATEDIFF('minute', pickup, dropoff) BETWEEN 1 AND (3.5*60)" # passa con pulizia
       - dbt_utils.expression_is_true:
           expression: "start_location_id BETWEEN 1 AND 265" # passa di base
       - dbt_utils.expression_is_true:
@@ -83,6 +83,11 @@ models:
 
   - name: stg_trip__speed_filtered
     description: "Calcola la velocità media per ogni corsa e filtra quelle con velocità non realistiche (es. troppo lente o troppo veloci), eliminando potenziali errori di tracciamento."
+    tests:
+    - dbt_utils.expression_is_true:
+        expression: "avg_speed_mph BETWEEN 3 AND 80" # passa con filtro velocità
+    - dbt_utils.expression_is_true:
+        expression: "trip_duration_hours BETWEEN 0.0166 AND 3.5" # tra 1 minuto e 3.5h
 
   - name: stg_trip__identifiers
     description: "Modello specializzato che espone solo gli identificatori principali della corsa (ID, codici, flag)."

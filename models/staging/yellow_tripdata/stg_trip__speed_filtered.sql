@@ -25,6 +25,9 @@ SELECT
     avg_speed_mph
 FROM trips_with_avg_speed
 WHERE
-    avg_speed_mph BETWEEN 3 AND 80
+    avg_speed_mph BETWEEN 3 AND 80 AND
+    trip_duration_hours BETWEEN 0.0166 AND 3.5 -- minimo 1 minuto
+
+
 
 ORDER BY avg_speed_mph, trip_distance 
