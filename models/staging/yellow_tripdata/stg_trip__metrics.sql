@@ -6,7 +6,7 @@ WITH normalized AS (
         vendor_id,
         passenger_count,
         trip_distance,
-        DATEDIFF('minute', pickup, dropoff) AS trip_minutes
+        trip_duration_hours*60 AS trip_minutes
     FROM {{ ref('stg_trip__speed_filtered') }}
 )
 
