@@ -31,8 +31,16 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   challenge:
     staging:
-      inspecting:
-        +enabled: false
+    +materialized: view
+      
+    inspecting:
+      +enabled: false
+
+    intermediate:
+      +materialized: table
+
+    marts:
+      +materialized: table
 #    +persist_docs:  # non è supportato da DuckDB, quindi la propagazione della documentazione non è possibile
 #      relations: true
 #      columns: true
