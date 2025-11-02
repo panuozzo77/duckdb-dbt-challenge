@@ -47,8 +47,7 @@ time_zones AS (
             WHEN EXTRACT(HOUR FROM (pickup + (dropoff - pickup)/2)) >= 5 AND EXTRACT(HOUR FROM (pickup + (dropoff - pickup)/2)) < 12 THEN 'Morning'
             WHEN EXTRACT(HOUR FROM (pickup + (dropoff - pickup)/2)) >= 12 AND EXTRACT(HOUR FROM (pickup + (dropoff - pickup)/2)) < 17 THEN 'Afternoon'
             WHEN EXTRACT(HOUR FROM (pickup + (dropoff - pickup)/2)) >= 17 AND EXTRACT(HOUR FROM (pickup + (dropoff - pickup)/2)) < 22 THEN 'Evening'
-            WHEN EXTRACT(HOUR FROM (pickup + (dropoff - pickup)/2)) >= 22 AND EXTRACT(HOUR FROM (pickup + (dropoff - pickup)/2)) < 5 THEN 'Night'
-            --ELSE 'Night'
+            ELSE 'Night'
         END AS time_of_day
     FROM {{ ref('int_trip__temporal_spatial') }}
 ),
