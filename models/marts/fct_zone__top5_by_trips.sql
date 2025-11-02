@@ -1,7 +1,7 @@
 WITH source AS (
     SELECT
         *
-    FROM {{ ref('fct_zone__pickup_summary') }}
+    FROM {{ ref('int_zone__pickup_summary') }}
 )
 
 SELECT
