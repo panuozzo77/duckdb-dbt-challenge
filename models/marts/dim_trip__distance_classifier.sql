@@ -37,7 +37,7 @@ SELECT
     END AS distance_category
 FROM cleaned_trips
 
-ORDER BY trip_minutes ASC , trip_distance DESC
+-- ORDER BY trip_minutes ASC , trip_distance DESC
 
 /*
 Previewing node 'fct_trip__distance_classifier':
