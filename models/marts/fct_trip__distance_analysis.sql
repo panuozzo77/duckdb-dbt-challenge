@@ -10,9 +10,9 @@ distances AS(
 
 SELECT
     distance_category,
-    SUM(total_amount) AS total_revenue,
-    SUM(total_amount) / COUNT (*) AS avg_revenue,
-    SUM(trip_minutes) / COUNT (*) AS avg_duration,
+    TRY_CAST(SUM(total_amount) AS DECIMAL(10, 2)) AS total_revenue,
+    TRY_CAST(SUM(total_amount) / COUNT (*) AS DECIMAL(10, 2)) AS avg_revenue,
+    TRY_CAST(SUM(trip_minutes) / COUNT (*) AS DECIMAL(10, 2)) AS avg_duration,
     COUNT(*) AS total_trips,
     avg_revenue / avg_duration AS '$/min'
     FROM distances

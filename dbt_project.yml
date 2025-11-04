@@ -43,7 +43,7 @@ models:
       +tags: ['solution']
 
     marts_2:
-      tags: ['solution_2', 'inspecting']
+      +tags: ['solution_2', 'inspecting']
 #    +persist_docs:  # non è supportato da DuckDB, quindi la propagazione della documentazione non è possibile
 #      relations: true
 #      columns: true

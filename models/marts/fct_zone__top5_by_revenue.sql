@@ -7,7 +7,7 @@ WITH source AS (
 SELECT
     pickup_zone,
     num_trips,
-    total_revenue
+    TRY_CAST(total_revenue AS DECIMAL(10, 2)) AS total_revenue
 FROM source
 ORDER BY total_revenue DESC
 LIMIT 5

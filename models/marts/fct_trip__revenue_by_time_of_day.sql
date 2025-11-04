@@ -70,7 +70,7 @@ joined AS (
 SELECT
     time_of_day as 'time',
     COUNT(*) AS n_trips,
-    SUM(total_amount) AS total_revenue
+    TRY_CAST(SUM(total_amount) AS DECIMAL(10, 2)) AS total_revenue
 FROM joined
 GROUP BY time_of_day
 ORDER BY

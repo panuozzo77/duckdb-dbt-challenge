@@ -24,6 +24,6 @@ joined AS (
 SELECT
     pickup_zone,
     COUNT(*) AS num_trips,
-    SUM(total_amount) AS total_revenue
+    TRY_CAST(SUM(total_amount) AS DECIMAL(10, 2)) AS total_revenue
 FROM joined
 GROUP BY pickup_zone
