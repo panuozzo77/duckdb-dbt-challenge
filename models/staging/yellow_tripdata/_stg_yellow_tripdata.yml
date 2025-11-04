@@ -68,6 +68,7 @@ models:
     columns:
       - name: vendor_id
         tests:
+          - not_null
           - accepted_values:
               values: [1, 2, 6, 7] # passa di base
       - name: rate_code_id
@@ -82,6 +83,64 @@ models:
         tests:
           - accepted_values:
               values: [0, 1, 2, 3, 4, 5, 6] #passa di base
+      
+      - name: trip_id
+        tests:
+          - unique
+          - not_null
+      
+      - name: pickup
+        tests:
+          - not_null
+
+      - name: dropoff
+        tests:
+          - not_null
+
+      - name: passenger_count
+        tests:
+          - not_null
+
+      - name: trip_distance
+        tests:
+          - not_null
+
+      - name: fare_amount
+        tests:
+          - not_null
+
+      - name: extra
+        tests:
+          - not_null
+
+      - name: mta_tax
+        tests:
+          - not_null
+
+      - name: tip_amount
+        tests:
+          - not_null
+
+      - name: tolls_amount
+        tests:
+          - not_null
+
+      - name: improvement_surcharge
+        tests:
+          - not_null
+
+      - name: congestion_surcharge
+        tests:
+          - not_null
+
+      - name: airport_fee
+        tests:
+          - not_null
+
+      - name: total_amount
+        tests:
+          - not_null
+
 
   - name: stg_trip__speed_filtered
     description: "Calcola la velocità media per ogni corsa e filtra quelle con velocità non realistiche (es. troppo lente o troppo veloci), eliminando potenziali errori di tracciamento."
