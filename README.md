@@ -29,6 +29,8 @@ $ uv run dbt run
 
 # execute this and see if it output 10 lines
 $ uv run duckdb data/db/yellow_tripdata.duckdb "select  * from staging_yellow_tripdata limit 10"
+```
+
 ---
 
 ### Documentation
@@ -55,6 +57,8 @@ $ uv run dbt test
 15:00:04  
 15:00:04  Done. PASS=55 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=55
 ```
+
+---
 
 ### Visualizing the marts
 
@@ -105,6 +109,8 @@ $ uv run duckdb data/db/yellow_tripdata.duckdb "select * from fct_trip__distance
 $ uv run dbt show -s fct_trip__distance_analysis
 
 ```
+
+---
 
 ## Contacts
 
