@@ -6,7 +6,8 @@ WITH normalized AS (
         vendor_id,
         passenger_count,
         trip_distance,
-        trip_duration_hours*60 AS trip_minutes
+        trip_duration_hours*60 AS trip_minutes,
+        avg_speed_mph
     FROM {{ ref('stg_trip__speed_filtered') }}
 )
 
