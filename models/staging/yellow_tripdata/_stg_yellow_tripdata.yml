@@ -90,18 +90,3 @@ models:
         expression: "avg_speed_mph BETWEEN 3 AND 80" # passa con filtro velocità
     - dbt_utils.expression_is_true:
         expression: "trip_duration_hours BETWEEN 0.0166 AND 3.5" # tra 1 minuto e 3.5h
-
-  - name: stg_trip__identifiers
-    description: "Modello specializzato che espone solo gli identificatori principali della corsa (ID, codici, flag)."
-
-  - name: stg_trip__metrics
-    description: "Modello specializzato che espone le metriche quantitative della corsa, come numero di passeggeri, distanza e durata in minuti."
-    columns:
-      - name: trip_minutes
-        description: "Durata totale della corsa calcolata in minuti."
-
-  - name: stg_trip__prices
-    description: "Modello specializzato che espone tutti i campi relativi alla composizione del prezzo finale della corsa (tariffe, tasse, mance, etc.)."
-
-  - name: stg_trip__temporal_spatial
-    description: "Modello specializzato che espone i dati temporali (pickup, dropoff) e spaziali (zone di partenza e arrivo) della corsa."

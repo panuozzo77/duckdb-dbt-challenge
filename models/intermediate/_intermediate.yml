@@ -1,0 +1,43 @@
+version: 2
+
+models:
+- name: int_trip__identifiers
+  description: "Modello specializzato che espone solo gli identificatori principali della corsa (ID, codici, flag)."
+
+- name: int_trip__metrics
+  description: "Modello specializzato che espone le metriche quantitative della corsa, come numero di passeggeri, distanza e durata in minuti."
+  columns:
+    - name: trip_minutes
+      description: "Durata totale della corsa calcolata in minuti."
+
+- name: int_trip__prices
+  description: "Modello specializzato che espone tutti i campi relativi alla composizione del prezzo finale della corsa (tariffe, tasse, mance, etc.)."
+
+- name: int_trip__temporal_spatial
+  description: "Modello specializzato che espone i dati temporali (pickup, dropoff) e spaziali (zone di partenza e arrivo) della corsa."
+
+- name: int_zone__pickup_summary
+  description: "Modello specializzato che espone solo gli identificatori principali della corsa (ID, codici, flag)."
+  columns:
+    - name: pickup_zone
+      tests:
+        - not_null:
+      description: "Every summary must be associated with a pickup zone."
+  - relationships:
+      to: ref('dim_zones')
+      field: location_id
+      description: "Every pickup zone ID must exist in the master list of zones."
+
+      - name: num_trips
+        description: "The total count of trips originating from this zone."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 1"
+              description: "The number of trips must be a positive integer."
+
+      - name: total_revenue
+        description: "The sum of total_amount for all trips from this zone."
+        tests:
+          - not_null
+
