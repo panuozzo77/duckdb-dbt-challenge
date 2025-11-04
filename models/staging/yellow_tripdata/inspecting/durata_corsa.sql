@@ -1,3 +1,7 @@
+{{ config(
+    tags=['inspecting']
+)}}
+
 --file preso dai target compilati
 select
     pickup,

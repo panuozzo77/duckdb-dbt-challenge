@@ -90,3 +90,10 @@ models:
         expression: "avg_speed_mph BETWEEN 3 AND 80" # passa con filtro velocità
     - dbt_utils.expression_is_true:
         expression: "trip_duration_hours BETWEEN 0.0166 AND 3.5" # tra 1 minuto e 3.5h
+    
+    colums:
+      - name: trip_duration_hours
+        description: "Ore per completare la corsa."
+      
+      - name: avg_speed_mph
+        description: "Velocità media stimata in mph"

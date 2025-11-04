@@ -1,3 +1,7 @@
+{{ config(
+    tags=['inspecting']
+)}}
+
 -- Test: corse con tragitti 'strani'
 SELECT
     COUNT_IF(start_location_id = end_location_id) AS stesso_id,

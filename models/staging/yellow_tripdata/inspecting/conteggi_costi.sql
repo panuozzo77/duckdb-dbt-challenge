@@ -1,3 +1,7 @@
+{{ config(
+    tags=['inspecting']
+)}}
+
 -- Test: Conta corse con costo 0 e costo < 0
 SELECT
     COUNT_IF(total_amount > 0) AS corse_costo_positivo,

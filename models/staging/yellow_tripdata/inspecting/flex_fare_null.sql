@@ -1,3 +1,7 @@
+{{ config(
+    tags=['inspecting']
+)}}
+
 WITH flex_fare_trips AS (
     SELECT *
     FROM {{ ref('stg_trip__base') }}

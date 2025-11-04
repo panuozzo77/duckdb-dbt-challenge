@@ -1,3 +1,7 @@
+{{ config(
+    tags=['inspecting']
+)}}
+
 -- payment_type IN (0, 1, 2, 3, 4, 5, 6)
 SELECT
     COUNT_IF(total_amount > 0 AND payment_type = 0) AS flessibile,

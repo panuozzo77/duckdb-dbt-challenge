@@ -1,3 +1,7 @@
+{{ config(
+    tags=['inspecting']
+)}}
+
 WITH airport_trips AS (
     SELECT
         *,

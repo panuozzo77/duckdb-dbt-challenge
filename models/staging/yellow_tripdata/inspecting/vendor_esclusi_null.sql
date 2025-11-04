@@ -1,3 +1,7 @@
+{{ config(
+    tags=['inspecting']
+)}}
+
 WITH raw_data AS (
     SELECT *
     FROM "yellow_tripdata"."main"."stg_trip__base"

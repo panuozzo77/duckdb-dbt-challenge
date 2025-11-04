@@ -1,3 +1,7 @@
+{{ config(
+    tags=['inspecting']
+)}}
+
 WITH short_trips AS (
     SELECT
         CASE

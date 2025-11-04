@@ -1,3 +1,7 @@
+{{ config(
+    tags=['inspecting']
+)}}
+
 WITH raw_counts AS (
     SELECT
         vendor_id,

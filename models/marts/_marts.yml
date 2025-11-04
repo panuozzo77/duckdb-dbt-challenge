@@ -1,0 +1,110 @@
+version: 2
+
+models:
+  - name: dim_trip__distance_classifier
+    description: "Classifica le corse in base alla distanza perimetrale in categorie predefinite (short, medium, long)."
+    columns:
+      - name: trip_id
+        description: "{{ doc('trip_id') }}"
+        tests:
+          - unique
+          - not_null
+      - name: vendor_id
+        description: "{{ doc('vendor_id') }}"
+        tests:
+          - not_null
+      - name: passenger_count
+        description: "Numero di passeggeri."
+      - name: trip_distance
+        description: "Distanza in miglia."
+      - name: trip_minutes
+        description: "Durata della corsa in minuti."
+      - name: distance_category
+        description: "Categoria di distanza della corsa (short, medium, long)."
+        tests:
+          - accepted_values:
+              values: ['short', 'medium', 'long']
+
+  - name: fct_trip__distance_analysis
+    description: "Analisi aggregata dei ricavi e della durata media delle corse, raggruppate per categoria di distanza."
+    columns:
+      - name: distance_category
+        description: "Categoria di distanza."
+        tests:
+          - not_null
+      - name: total_revenue
+        description: "Ricavo totale per categoria di distanza."
+        tests:
+          - not_null
+      - name: avg_revenue
+        description: "Ricavo medio per corsa in quella categoria di distanza."
+      - name: avg_duration
+        description: "Durata media in minuti per corsa in quella categoria."
+      - name: total_trips
+        description: "Numero totale di corse per categoria."
+      - name: "$/min"
+        description: "Ricavo medio per minuto."
+
+  - name: fct_trip__distance_boundaries
+    description: "Definisce i limiti minimi e massimi di distanza per ciascuna categoria, insieme al conteggio delle corse."
+    columns:
+      - name: distance_category
+        description: "Categoria di distanza."
+        tests:
+          - not_null
+      - name: min_distance
+        description: "Distanza minima registrata per la categoria."
+      - name: max_distance
+        description: "Distanza massima registrata per la categoria."
+      - name: number_of_trips
+        description: "Numero di corse in quella categoria."
+
+  - name: fct_trip__revenue_by_time_of_day
+    description: "Aggrega i ricavi totali e il numero di corse per fascia oraria (Morning, Afternoon, Evening, Night)."
+    columns:
+      - name: time
+        description: "Fascia oraria della corsa."
+        tests:
+          - accepted_values:
+              values: ['Morning', 'Afternoon', 'Evening', 'Night']
+      - name: n_trips
+        description: "Numero di corse per fascia oraria."
+      - name: total_revenue
+        description: "Ricavo totale per fascia oraria."
+
+  - name: fct_vendor__tip_percentage
+    description: "Calcola la percentuale media di mancia rispetto all'importo totale per ciascun vendor."
+    columns:
+      - name: vendor_id
+        description: "{{ doc('vendor_id') }}"
+        tests:
+          - not_null
+      - name: tip_percentage
+        description: "Percentuale di mancia sul totale."
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "tip_percentage BETWEEN 0 AND 1"
+
+  - name: fct_zone__top5_by_revenue
+    description: "Identifica le 5 zone di partenza con i ricavi totali più alti."
+    columns:
+      - name: pickup_zone
+        description: "ID della zona di partenza."
+        tests:
+          - not_null
+      - name: num_trips
+        description: "Numero di corse dalla zona."
+      - name: total_revenue
+        description: "Ricavo totale generato dalle corse partite dalla zona."
+
+  - name: fct_zone__top5_by_trips
+    description: "Identifica le 5 zone di partenza con il maggior numero di corse."
+    columns:
+      - name: pickup_zone
+        description: "ID della zona di partenza."
+        tests:
+          - not_null
+      - name: num_trips
+        description: "Numero di corse dalla zona."
+      - name: total_revenue
+        description: "Ricavo totale generato dalle corse partite dalla zona."

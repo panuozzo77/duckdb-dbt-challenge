@@ -9,17 +9,23 @@ models:
         tests:
           - unique
           - not_null
+          
       - name: vendor_id
         description: "{{ doc('vendor_id') }}"
         tests:
           - not_null
+
       - name: rate_code_id
         description: "{{ doc('rate_code_id') }}"
       - name: store_and_fwd_flag
-        description: "{{ doc('store_and_fwd_flag') }}"
         tests:
           - accepted_values:
               values: ['Y', 'N']
+
+        description: "{{ doc('store_and_fwd_flag') }}"
+      - name: payment_type
+        description: "{{ doc('payment_type') }}"
+        
 
   - name: int_trip__metrics
     description: "Metriche quantitative della corsa: distanza, durata e velocità medie."
@@ -39,7 +45,20 @@ models:
 
       - name: avg_speed_mph
         description: "Velocità media stimata in mph."
-          
+
+      - name: passenger_count
+        description: "Numero di passeggeri."
+      
+      - name: trip_id
+        description: "{{ doc('trip_id') }}"
+        tests:
+          - unique
+          - not_null
+    
+      - name: vendor_id
+        description: "{{ doc('vendor_id') }}"
+        tests:
+          - not_null          
 
   - name: int_trip__prices
     description: "Composizione del prezzo della corsa (tariffe, tasse, mance, pedaggi, totale)."
@@ -49,6 +68,17 @@ models:
       - dbt_utils.expression_is_true:
           expression: "total_amount >= COALESCE(fare_amount,0) + COALESCE(extra,0) + COALESCE(mta_tax,0) + COALESCE(tip_amount,0) + COALESCE(tolls_amount,0) + COALESCE(improvement_surcharge,0) + COALESCE(congestion_surcharge,0) + COALESCE(airport_fee,0)"
     columns:
+      - name: trip_id
+        description: "{{ doc('trip_id') }}"
+        tests:
+          - unique
+          - not_null
+    
+      - name: vendor_id
+        description: "{{ doc('vendor_id') }}"
+        tests:
+          - not_null
+
       - name: fare_amount
         description: "Tariffa base della corsa, calcolata in base a tempo e distanza."
 
@@ -87,6 +117,17 @@ models:
       - dbt_utils.expression_is_true:
           expression: "end_location_id BETWEEN 1 AND 265"
     columns:
+      - name: trip_id
+        description: "{{ doc('trip_id') }}"
+        tests:
+          - unique
+          - not_null
+    
+      - name: vendor_id
+        description: "{{ doc('vendor_id') }}"
+        tests:
+          - not_null
+
       - name: pickup
         description: "Timestamp di partenza."
         tests:
