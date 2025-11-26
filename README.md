@@ -20,7 +20,10 @@ $ uv run dbt deps
 
 $ wget  https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2025-08.parquet -P data/raw
 
-$ uv run dbt run
+$ uv run duckdb data/db/yellow_tripdata.duckdb -c "CREATE OR REPLACE TABLE raw_data AS SELECT * FROM read_parquet('yellow_tripdata_2025-08.parquet');"
+
+$ uv run dbt run --exclude tag:inspecting
+
 
 [wait until you see...]
 13:38:14  
