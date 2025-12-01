@@ -4,6 +4,23 @@
 
 TODO: indagare perché gli altri vendor sono stati cancellati con le pulizie precedenti
 
+```sql
+WITH prices AS (
+    SELECT
+        vendor_id,
+        tip_amount,
+        total_amount
+        FROM {{ ref('int_trip__prices')}}
+)
+
+SELECT 
+    vendor_id,
+    TRY_CAST(SUM(tip_amount) / SUM(total_amount) AS DECIMAL(10, 2)) AS tip_percentage,
+FROM prices
+GROUP BY vendor_id
+ORDER BY tip_percentage
+```
+
   Previewing node 'fct_vendor_tip_percentage':
 | vendor_id | tip_percentage |
 | --------- | -------------- |
@@ -11,7 +28,7 @@ TODO: indagare perché gli altri vendor sono stati cancellati con le pulizie pre
 |         2 |         0,127… |
 
 Gli altri vendor (6, 7) sono stati totalmente eliminati perché possiedono valori non validi
-- per VendorID7 [47276 corse], vengono tutti eliminati perché non utilizzano una durata consona
+- per VendorID7 [47276 corse], vengono tutti eliminati perché non utilizzano una durata consona, ovvero il tempo di inizio e di fine sono gli stessi
 - VendorID6 [2580 corse], vengono tutti eliminati perché hanno un numero di passeggeri uguale a null
 
 uv run duckdb data/db/yellow_tripdata.duckdb "select * from vendor_esclusi_null"
