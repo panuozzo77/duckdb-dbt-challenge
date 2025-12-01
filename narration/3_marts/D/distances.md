@@ -12,6 +12,22 @@ Ho dovuto modificare nel modello dim_trip__distance_classifier i segmenti delle 
 e così calcolare la media dei guadagni
 
 ```sql
+SELECT
+    trip_id,
+    vendor_id,
+    passenger_count,
+    trip_distance,
+    trip_minutes,
+    CASE
+        WHEN trip_distance <= 2 THEN 'short'
+        WHEN trip_distance > 2 AND trip_distance <= 5  THEN 'medium'
+        WHEN trip_distance > 5 THEN 'long'
+    END AS distance_category
+FROM cleaned_trips
+```
+
+
+```sql
 WITH revenues AS(
     SELECT * 
     FROM {{ref('int_trip__prices')}}

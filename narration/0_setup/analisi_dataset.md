@@ -8,7 +8,7 @@ il dizionario dei dati (info sulle colonne) è [questo](/docs/data_dictionary_tr
 
 È risultato utile per la creazione della documentazione.
 
-**NOTA:** la documentazione con lo stack tecnologico impiegato (DuckDB + dbt) non permette la propagazione, costringendo a doverla riscrivere/allegare per ciascun modello la documentazione. È possibile evitarlo con altri tool di Data Warehouse
+**NOTA:** la documentazione con lo stack tecnologico impiegato (DuckDB + dbt) non permette la propagazione, costringendo a dover riscrivere/allegare per ciascun modello la documentazione. È possibile evitarlo con altri tool di Data Warehouse
 
 ---
 
